@@ -1,0 +1,38 @@
+PASS: 監査ループがなければ、参照付きループで正規化した結果は保持される
+FAIL: 読み取り専用の監査ループを通しても、正規化済みの末尾レコードは保持される
+監査用の読み取りループは注文レコードを変更してはならない
+Expected: array (
+  0 => 
+  array (
+    'id' => 'order-100',
+    'status' => 'settled',
+  ),
+  1 => 
+  array (
+    'id' => 'order-200',
+    'status' => 'pending',
+  ),
+  2 => 
+  array (
+    'id' => 'order-300',
+    'status' => 'settled',
+  ),
+)
+Actual:   array (
+  0 => 
+  array (
+    'id' => 'order-100',
+    'status' => 'settled',
+  ),
+  1 => 
+  array (
+    'id' => 'order-200',
+    'status' => 'pending',
+  ),
+  2 => 
+  array (
+    'id' => 'order-200',
+    'status' => 'pending',
+  ),
+)
+1 test(s) failed.
