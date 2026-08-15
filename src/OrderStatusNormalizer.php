@@ -17,9 +17,9 @@ final class OrderStatusNormalizer
                 $order['status'] = 'settled';
             }
         }
+        unset($order); // 最後の要素への参照を切る。
 
         // 意図: 読み取り専用の監査ログ用ループ。
-        // 不具合: $order は最後の要素への参照のまま残っている。
         foreach ($orders as $order) {
             $this->writeAuditLine($order);
         }
